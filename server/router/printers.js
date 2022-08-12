@@ -65,11 +65,17 @@ printersRouter.put("/:id", async (req, res) => {
     ...item,
     id: paramId,
   };
-  const idEdit = await printerContainer.edit(editItem);
-  res.send({
-    messagge: "success",
-    data: idEdit,
-  });
+  try {
+    const idEdit = await printerContainer.edit(editItem);
+    res.send({
+      messagge: "success",
+      data: idEdit,
+    });
+  } catch (e) {
+    res.send({
+      error: e,
+    });
+  }
 });
 
 printersRouter.delete("/:id", async (req, res) => {

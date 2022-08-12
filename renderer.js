@@ -2,6 +2,10 @@ const { default: axios } = require("axios");
 let { remote } = require("electron");
 // console.log(process.versions.electron);
 
+const log = (text) => {
+  document.getElementById("log").innerHTML = text;
+};
+
 const { PosPrinter } = remote.require("electron-pos-printer");
 // const { PosPrinter } = require("electron-pos-printer"); //dont work in production (??)
 
@@ -59,12 +63,12 @@ async function readPrinters() {
   </tr>`;
 
   printersAdded.map((item, index) => {
-    let printersHTML = `<select>`;
+    let printersHTML = `<select name="${item.id}" onchange="pintar(this)">`;
 
     printers.map((printer, index) => {
-      printersHTML += `<option ${printer.name === item.name && "selected"}>${
-        printer.name
-      }</option>`;
+      printersHTML += `<option value="${printer.name}" ${
+        printer.name === item.name && "selected"
+      }>${printer.name}</option>`;
     });
 
     printersHTML += `</select>`;
@@ -84,8 +88,17 @@ async function readPrinters() {
 async function addPrinter() {
   try {
     await axios.post("http://localhost:5636/api/printers", {
-      name: "Imp nueva",
+      name: printers[0].name,
     });
+  } catch (e) {
+    alert(e);
+  }
+  readPrinters();
+}
+
+async function editPrinter(id, object) {
+  try {
+    await axios.put(`http://localhost:5636/api/printers/${id}`, object);
   } catch (e) {
     alert(e);
   }
@@ -99,4 +112,12 @@ async function deletePrinter(printerId) {
     alert(e);
   }
   readPrinters();
+}
+
+function pintar(selectedObject) {
+  const id = selectedObject.name;
+  const value = selectedObject.value;
+  editPrinter(id, {
+    name: value,
+  });
 }

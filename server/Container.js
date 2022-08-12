@@ -36,16 +36,16 @@ class Container {
   }
 
   // FUNCIÓN PARA EDITAR
-  async edit(item) {
+  async edit(editedItem) {
     try {
       // Traer items
       const contenido = await fs.promises.readFile(this.file, "utf-8");
       const listaItems = JSON.parse(contenido);
 
       // NUEVO ARRAY
-      var itemsNuevo = listaItems.map((item) => {
-        if (item.id === item.id) {
-          return { ...item };
+      let itemsNuevo = listaItems.map((item) => {
+        if (item.id == editedItem.id) {
+          return { ...editedItem };
         }
         return { ...item };
       });
@@ -53,7 +53,7 @@ class Container {
       const itemsString = JSON.stringify(itemsNuevo, null, 2);
       await fs.promises.writeFile(this.file, itemsString);
       // Retorna el id guardado
-      return item.id;
+      return editedItem.id;
     } catch (error) {
       console.log("error: ", error);
     }
