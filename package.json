@@ -1,28 +1,55 @@
 {
-  "name": "electron-printer",
+  "name": "electron-printer-2",
   "version": "1.0.0",
   "description": "Test for printer - thermal printers too",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  
   "repository": "https://github.com/fssonca/electron-printer",
   "keywords": [
     "Electron",
     "quick",
     "start",
     "tutorial",
-	"printer",
+    "printer",
     "demo"
   ],
   "author": "Fernando Sousa",
-
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-deb": "^6.0.0-beta.65",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-wix": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
     "electron": "^9.1.0"
-    
   },
   "dependencies": {
-    "electron-pos-printer": "^1.2.0"
+    "electron-pos-printer": "^1.2.0",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-wix",
+          "config": {
+            "language": 1033,
+            "manufacturer": "My Awesome Company"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin",
+            "windows"
+          ]
+        }
+      ]
+    }
   }
 }
