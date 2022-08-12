@@ -1,7 +1,7 @@
 {
-  "name": "electron-printer-2",
+  "name": "london-printer",
   "version": "1.0.0",
-  "description": "Test for printer - thermal printers too",
+  "description": "Seleccioná tus impresoras para el London Manager",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -17,7 +17,7 @@
     "printer",
     "demo"
   ],
-  "author": "Fernando Sousa",
+  "author": "London Estudio",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.65",
     "@electron-forge/maker-deb": "^6.0.0-beta.65",
@@ -28,8 +28,12 @@
     "electron": "^9.1.0"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "electron-pos-printer": "^1.2.0",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
   },
   "config": {
     "forge": {

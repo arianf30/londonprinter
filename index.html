@@ -2,62 +2,31 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <!-- <m eta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
- 	
-   
-	
-    <title>TEST PRINTER</title>
-	
-	
-	<style>
-	body{font-family:sans-serif}
-	
-	</style>
+    <title>Printer Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
   </head>
-  <body>
-    <h1>Test printer</h1>
-    Node.js <span id="node-version"></span> - 
-    Chromium <span id="chrome-version"></span> - 
-    Electron <span id="electron-version"></span>.
-	
-	<div>
-	
-	<form name>
-  <p>List of printers:</p>
-  
-  <div id='list_printers'>
+  <body onload="readPrinters()" style="background: #363B63; padding: 2rem; box-sizing: border-box; text-align: center;">
+    <div style="text-align: center; padding: 1.33rem 0 1rem 0;">
+      <img src="assets/logo_londonmanager.svg" alt="Logo London Manager" width="300" />
+    </div>
 
-  </div>
+    <div style="display:inline-flex; width: 400px; flex-direction: column; justify-content: center; color: white;">
+      <h2 style="margin-bottom: 0rem;">Printer Manager</h2>
+      <h5 style="font-weight: 300; line-height: 1.5; margin-bottom: 0;">Desde el sistema relacioná estos números con las acciones a realizar (comandas de cocina, comandas de bebidas, impresión de cuenta, impresión de factura).</h5>
+    </div>
 
-  <br>  
+    <div style="display: flex; justify-content: center;">
+      <table class="rwd-table" id="table_printers">
+        <tr>
+          <th>N°</th>
+          <th>Seleccione su impresora</th>
+          <th></th>
+        </tr>
+      </table>
+    </div>
 
-  <p>Width</p>
-  <input type="radio" id="w1" name="width" value="140px">
-  <label for="w1">140px</label><br>
-  
-  <input type="radio" id="w2" name="width" value="170px">
-  <label for="w2">170px</label><br>
-  
-  <input type="radio" id="w3" name="width" value="200px">
-  <label for="w3">200px</label><br>
-  
-  <input type="radio" id="w4" name="width" value="250px">
-  <label for="w4">250px</label><br>
-  
-  <input type="radio" id="w5" name="width" value="300px">
-  <label for="w5">300px</label><br>
-  
- 
-</form>
-	
-	</div>
-	
-	<br>
-<input onclick="print()" type="button" value="printer test"/>
-<br>
-<br>
-<br>
+    <button class="primary" style="margin-top: 1rem;" onclick="addPrinter()">Añadir impresora</button>
+
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>

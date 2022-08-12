@@ -2,14 +2,16 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
+const server = require("./server/index.js");
+
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 500,
     height: 700,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      nodeIntegration: true,     // ATENÇÃO AQUI - attention here - that's why your node_module works or not
+      nodeIntegration: true, // ATENÇÃO AQUI - attention here - that's why your node_module works or not
     },
   });
 
