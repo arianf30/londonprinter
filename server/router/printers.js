@@ -12,8 +12,8 @@ const { PosPrinter } = require("electron-pos-printer"); //dont work in productio
 const path = require("path");
 
 const SIZES = {
-  0: 300,
-  1: 218,
+  0: 200,
+  1: 140,
 };
 
 async function silentPrint(printerName, typePrint, dataPrint) {
@@ -26,6 +26,12 @@ async function silentPrint(printerName, typePrint, dataPrint) {
     timeOutPerLine: 400,
     silent: true,
   };
+  const data = [...dataPrint];
+  try {
+    await PosPrinter.print(data, options);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 printersRouter.get("/", async (req, res) => {
@@ -87,20 +93,19 @@ printersRouter.delete("/:id", async (req, res) => {
 });
 
 // ENDPOINT IMPRIMIR
-printersRouter.post("/print/:id", async (req, res) => {
-  const paramId = parseInt(req.params.id);
-  const printInfo = req.body;
-  let typePrint = printInfo.type || 0;
-  let dataPrint = printInfo.data || null;
+printersRouter.post("/print", async (req, res) => {
+  const printerId = req.body.id || null;
+  const type = req.body.type || 0;
+  const data = req.body.data || [];
 
-  const item = await printerContainer.getById(paramId);
+  const item = await printerContainer.getById(printerId);
   if (item === null) {
     res.send({
       error: "Impresora no encontrada",
     });
   } else {
     try {
-      silentPrint(item.name, typePrint, dataPrint);
+      silentPrint(item.name, type, data);
       res.status(200).send("ok");
     } catch (e) {
       res.send({
