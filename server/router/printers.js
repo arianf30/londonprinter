@@ -11,15 +11,10 @@ let { remote } = require("electron");
 const { PosPrinter } = require("electron-pos-printer"); //dont work in production (??)
 const path = require("path");
 
-const SIZES = {
-  0: 200,
-  1: 140,
-};
-
-async function silentPrint(printerName, typePrint, dataPrint) {
+async function silentPrint(printerName, widthPrint, dataPrint) {
   const options = {
     preview: false, // Preview in window or print
-    width: SIZES[typePrint], //  width of content body
+    width: widthPrint, //  width of content body
     margin: "0 0 0 0", // margin of content body
     copies: 1, // Number of copies to print
     printerName: printerName, // printerName: string, check it at webContent.getPrinters()
@@ -95,7 +90,7 @@ printersRouter.delete("/:id", async (req, res) => {
 // ENDPOINT IMPRIMIR
 printersRouter.post("/print", async (req, res) => {
   const printerId = req.body.printer || null;
-  const type = req.body.type || 0;
+  const width = req.body.width || 0;
   const data = req.body.data || [];
 
   const item = await printerContainer.getById(parseInt(printerId));
@@ -105,7 +100,7 @@ printersRouter.post("/print", async (req, res) => {
     });
   } else {
     try {
-      silentPrint(item.name, type, data);
+      silentPrint(item.name, width, data);
       res.status(200).send("ok");
     } catch (e) {
       res.send({
