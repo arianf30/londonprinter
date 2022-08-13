@@ -94,7 +94,7 @@ printersRouter.delete("/:id", async (req, res) => {
 
 // ENDPOINT IMPRIMIR
 printersRouter.post("/print", async (req, res) => {
-  const printerId = req.body.id || null;
+  const printerId = req.body.printer || null;
   const type = req.body.type || 0;
   const data = req.body.data || [];
 
