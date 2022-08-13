@@ -98,7 +98,7 @@ printersRouter.post("/print", async (req, res) => {
   const type = req.body.type || 0;
   const data = req.body.data || [];
 
-  const item = await printerContainer.getById(printerId);
+  const item = await printerContainer.getById(parseInt(printerId));
   if (item === null) {
     res.send({
       error: "Impresora no encontrada",
