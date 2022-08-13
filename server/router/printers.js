@@ -14,7 +14,7 @@ const path = require("path");
 async function silentPrint(printerName, widthPrint, dataPrint) {
   const options = {
     preview: false, // Preview in window or print
-    width: widthPrint, //  width of content body
+    width: parseInt(widthPrint), //  width of content body
     margin: "0 0 0 0", // margin of content body
     copies: 1, // Number of copies to print
     printerName: printerName, // printerName: string, check it at webContent.getPrinters()
