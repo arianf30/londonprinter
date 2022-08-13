@@ -12,6 +12,7 @@ class Container {
       // Traer items
       const contenido = await fs.promises.readFile(this.file, "utf-8");
       // Si no hay items, el id será 1
+      console.log(contenido);
       if (contenido === "" || contenido === "[]") {
         item.id = 1;
         items.push(item);
