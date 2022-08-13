@@ -12,7 +12,6 @@ class Container {
       // Traer items
       const contenido = await fs.promises.readFile(this.file, "utf-8");
       // Si no hay items, el id será 1
-      console.log(contenido);
       if (contenido === "" || contenido === "[]") {
         item.id = 1;
         items.push(item);
@@ -66,7 +65,7 @@ class Container {
       const contenido = await fs.promises.readFile(this.file, "utf-8");
       // Si no hay items retorna null
       if (contenido === "") {
-        return "No hay items.";
+        return null;
         // Si hay items, busca el id
       } else {
         const listaItems = JSON.parse(contenido);
